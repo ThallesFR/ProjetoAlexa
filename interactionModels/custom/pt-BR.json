@@ -1,0 +1,225 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "universidade rodrigues",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "é só isso alexa",
+            "Obrigado Alexa"
+          ]
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "olá",
+            "como vai você",
+            "diga oi mundo",
+            "diga oi",
+            "oi",
+            "diga olá mundo",
+            "diga olá"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AulaIntent",
+          "slots": [
+            {
+              "name": "diaSemana",
+              "type": "AMAZON.DayOfWeek"
+            }
+          ],
+          "samples": [
+            "qual aula terei na {diaSemana}",
+            "aulas que terei na {diaSemana}",
+            "aula que terei na {diaSemana}",
+            "quais aulas terei na {diaSemana}",
+            "aulas de {diaSemana}",
+            "quais aulas são {diaSemana}",
+            "aula {diaSemana}",
+            "aula de {diaSemana}",
+            "aulas {diaSemana}",
+            "que aula tenho {diaSemana}",
+            "quais aulas tenho {diaSemana}",
+            "que aula tenho na proxima {diaSemana}",
+            "que aula tenho no proximo {diaSemana}",
+            "quais aulas tenho na proxima {diaSemana}",
+            "quais aulas tenho no próximo {diaSemana}",
+            "que aula tenho na {diaSemana}",
+            "que aula terei no {diaSemana}",
+            "aula que tenho {diaSemana}",
+            "aulas que tenho {diaSemana}",
+            "aulas que terei {diaSemana}",
+            "aula que terei {diaSemana}",
+            "qual aula terei no {diaSemana}",
+            "qual aula terei {diaSemana}",
+            "quais aulas terei no {diaSemana}",
+            "aula que terei no {diaSemana}",
+            "aulas que terei no {diaSemana}"
+          ]
+        },
+        {
+          "name": "HorarioCoordenadorIntent",
+          "slots": [],
+          "samples": [
+            "qual agenda coordenador ",
+            "qual agenda coordenadora ",
+            "qual agenda coordenação ",
+            "qual a agenda da coordenação ",
+            "qual a agenda do coordendor ",
+            "quais horários da coordenadora ",
+            "quais são horários da coordenadora ",
+            "quais são os horários da coordenadora ",
+            "qual é os horários da coordenadora ",
+            "qual os horários da coordenadora ",
+            "qual é o horário da coordenadora",
+            "disponibilidade da coordenadação",
+            "coordenadora",
+            "horário da coordenadora ",
+            "horário coordenadora ",
+            "horários da coordenadora",
+            "horários coordenadora ",
+            "disponibilidade da coordenadora",
+            "disponibilidade coordenadora ",
+            "calendário do coordenador ",
+            "calendário da coordenadora ",
+            "calendário da coordenação ",
+            "agenda coordenadora",
+            "qual a agenda da coordeanção ",
+            "qual é a agenda da coordenação",
+            "calendário coordenação",
+            "calendário coordenadora ",
+            "calendário coordenador ",
+            "qual  é a agenda da coordenadora ",
+            "qual é a agenda do coordenador ",
+            "qual a agenda da coordenadora ",
+            "qual a agenda do coordenador ",
+            "quais os horários da coordenadora ",
+            "qual o horário da coordenadora",
+            "qual o calendário da coordenadora",
+            "qual o calendário do coordenador",
+            "agenda da coordenação",
+            "agenda coordenação ",
+            "qual é o horário da coordenação ",
+            "quais são os horários da coordenação",
+            "qual o horário  horário da coordenação ",
+            "quais os horários da coordenação ",
+            "qual é o horário do coordenador ",
+            "quais são os horários do coordenador ",
+            "qual o horário do coordenador ",
+            "quais os horários do coordenador ",
+            "disponibilidade coordenação",
+            "disponibilidade da coordenação ",
+            "horários cordenação",
+            "horários da coordenação",
+            "horário da coordenação",
+            "horário coordenação",
+            "coordenação",
+            "horários coordenador",
+            "horários do coordenador",
+            "disponibilidade coordenador",
+            "agenda coordenador ",
+            "agenda do coordenador",
+            "disponibilidade do coordenador",
+            "coordenador",
+            "horário do coordenador",
+            "horário coordenador"
+          ]
+        },
+        {
+          "name": "NotasIntent",
+          "slots": [],
+          "samples": [
+            "qual é a minha nota semestral",
+            "qual é a minha nota ",
+            "as minhas notas semestrais",
+            "a minha nota semestral ",
+            "as notas semestrais ",
+            "a nota semestral ",
+            "as minhas notas",
+            "a minha nota ",
+            "quais são as minhas notas semestrais ",
+            "quais as minhas notas semestrais",
+            "qual a minha nota semestral ",
+            "qual é minha nota semestral",
+            "quais são minhas notas semestrais ",
+            "quais são as minhas notas ",
+            "quais as minhas notas ",
+            "qual a minha nota ",
+            "qual é minha nota ",
+            "quais são minhas notas ",
+            "notas do semestre",
+            "nota do semestre ",
+            "notas semestrais ",
+            "nota semestral",
+            "minhas notas semestrais",
+            "minha nota semestral",
+            "minha nota ",
+            "minhas notas",
+            "boletim de notas",
+            "boletim",
+            "nota",
+            "notas"
+          ]
+        },
+        {
+          "name": "AulaPassadoIntent",
+          "slots": [
+            {
+              "name": "diaSemanaPas",
+              "type": "AMAZON.DayOfWeek"
+            }
+          ],
+          "samples": [
+            "que aula eu tive {diaSemanaPas}",
+            "que aulas eu tive {diaSemanaPas}",
+            "quais aulas eu tive {diaSemanaPas}",
+            "que aula tive {diaSemanaPas}",
+            "que aulas tive na {diaSemanaPas}",
+            "que aulas tive {diaSemanaPas}",
+            "que aula tive no {diaSemanaPas}",
+            "quais aulas tive {diaSemanaPas}",
+            "quais aulas tive no {diaSemanaPas}",
+            "aula que tive {diaSemanaPas}",
+            "quais aulas que tive {diaSemanaPas}",
+            "aulas que tive no {diaSemanaPas}",
+            "aula  que tive no {diaSemanaPas}",
+            "aula que eu tive na {diaSemanaPas} passada",
+            "aula que tive no {diaSemanaPas} passado",
+            "que aulas tive {diaSemanaPas} passada",
+            "quais aulas tive {diaSemanaPas} passada ",
+            "que aulas tive {diaSemanaPas} passado",
+            "que aula tive {diaSemanaPas} passado",
+            "quais aulas tive {diaSemanaPas} passado",
+            "{diaSemanaPas} tive aula de que ",
+            "{diaSemanaPas} tive que aula ",
+            "{diaSemanaPas} tive quais aulas ",
+            "{diaSemanaPas} tive que aulas ",
+            "{diaSemanaPas} tive aulas de que ",
+            "{diaSemanaPas} quais aulas eu tive ",
+            "{diaSemanaPas} que aulas eu tive",
+            "{diaSemanaPas} que aula tive ",
+            "{diaSemanaPas} que aulas tive ",
+            "{diaSemanaPas} quais aulas tive "
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "48"
+}
