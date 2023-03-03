@@ -1,22 +1,22 @@
 const Alexa = require("ask-sdk-core");
 
-const DOCUMENT_ID = "Notas";
+const DOCUMENT_ID = "telaNotas";
 
 const datasource = {
     "multipleChoiceTemplateData": {
         "type": "object",
         "properties": {
-            "backgroundImage": "https://image.slidesharecdn.com/unisuam-140926155615-phpapp02/85/case-hybrid-mobile-app-unisuam-1-638.jpg?cb=1671818227",
+            "backgroundImage": "https://img.freepik.com/vetores-gratis/fundo-de-gradiente-de-linhas-azuis-dinamicas_23-2148995756.jpg",
             "titleText": "Suas notas deste semestre",
             "primaryText": "",
             "choices": [
-                "AC:",
-                "AI:",
-                "Média:"
+                "AC: 9.3",
+                "AI: 9.1",
+                "Média: 9.2"
             ],
             "choiceListType": "number",
             "headerAttributionImage": "https://seeklogo.com/images/U/unisuam-logo-F9DC14A346-seeklogo.com.png",
-            "footerHintText": "Universidade Rodrigues, Compromisso para a vida toda!"
+            "footerHintText": "Universidade UNISUAM, Compromisso para a vida toda!"
         }
     }
 };
@@ -33,11 +33,11 @@ const createDirectivePayload = (aplDocumentId, dataSources = {}, tokenId = "docu
     }
 };
 
- exports.FUNtelaNotas = function(handlerInput) {
+exports.ExibirTelaNotas = function(handlerInput) {
         if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
             // generate the APL RenderDocument directive that will be returned from your skill
             const aplDirective = createDirectivePayload(DOCUMENT_ID, datasource);
             // add the RenderDocument directive to the responseBuilder
             handlerInput.responseBuilder.addDirective(aplDirective);
         }
- };
+};

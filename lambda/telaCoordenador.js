@@ -1,6 +1,6 @@
 const Alexa = require("ask-sdk-core");
 
-const DOCUMENT_ID = "interfaceCoordenacao";
+const DOCUMENT_ID = "telaCoordenador";
 
 const datasource = {
     "detailImageRightData": {
@@ -12,7 +12,7 @@ const datasource = {
             "largeSourceUrl": null,
             "sources": [
                 {
-                    "url": "https://desafiosdaeducacao.com.br/wp-content/uploads/2018/11/unisuam1.jpg",
+                    "url": "https://img.freepik.com/vetores-gratis/fundo-de-gradiente-de-linhas-azuis-dinamicas_23-2148995756.jpg",
                     "size": "large"
                 }
             ]
@@ -71,11 +71,12 @@ const createDirectivePayload = (aplDocumentId, dataSources = {}, tokenId = "docu
     }
 };
 
-exports.FUNtelaCoordenacao = function(handlerInput) {
+exports.ExibirTelaCoordenador = function(handlerInput) {
         if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
             // generate the APL RenderDocument directive that will be returned from your skill
             const aplDirective = createDirectivePayload(DOCUMENT_ID, datasource);
             // add the RenderDocument directive to the responseBuilder
             handlerInput.responseBuilder.addDirective(aplDirective);
         }
-    };
+};
+

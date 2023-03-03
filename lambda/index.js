@@ -4,30 +4,25 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+const parTelaAula = require('./telaAula.js');
+const parTelaNotas = require('./telaNotas.js');
+const parTelaCoordenador = require('./telaCoordenador.js');
+const parTelaHome = require ('./telaHome.js');
 
-const tela = require('./tela.js');
-
-const telaNotas = require('./telaNotas.js');
-
-const telaCoordenacao = require("./telaCoordenador.js");
-
-const telaHome = require ("./home.js")
 
 const LaunchRequestHandler = {
-
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    
     handle(handlerInput) {
-        const speakOutput = 'Universidade Rodrigues. Compromisso para a vida toda. Você poderá acessar o seu calendário de aulas, o boletim de notas, horário do seu coordenador e mais. O que você gostaria?';
-        telaHome.FUNtelaHome(handlerInput);
+        
+        const speakOutput = "UNISUAM. Compromisso para a vida toda. Aqui você poderá acessar o seu calendário de aulas, o boletim de notas, horário do seu coordenador e mais. O que você gostaria ?";
+        parTelaHome.ExibirTelaHome(handlerInput);
         
         return handlerInput.responseBuilder
-        .speak(speakOutput)
-        .reprompt(speakOutput)
-        .getResponse();
-    
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
     }
 };
 
@@ -37,9 +32,8 @@ const AulaIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AulaIntent';
     },
-    
     handle(handlerInput) {
-       
+        
         const parDiaSemana =handlerInput.requestEnvelope.request.intent.slots.diaSemana.value;
         let speakOutput = 'não entendi. pode repitir?';
        
@@ -47,58 +41,57 @@ const AulaIntentHandler = {
             
             case "hoje":
                 speakOutput = "Hoje você tem aula de Orientação a Objeto, das 18:30 às 22:10";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
-            
             
             case "amanhã":
-                speakOutput= "Amanhã você terá aula de arquitetura e infraestrutura em núvem";
-                tela.telaUni(handlerInput);
+                speakOutput = "Amanhã você terá aula de arquitetura e infraestrutura em núvem";
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
 
-            case "2ª":case"2.ª-feira":
+            case "2ª": case "2.ª": case"2.ª-feira" : case"segunda": case"segunda feira":
                 speakOutput = "Segunda você terá aula de matemática das 18 às 22 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
-            case "3ª":case "3.ª feira": case"terça": case"terça feira":
+            case "3ª": case "3.ª": case "3.ª feira": case "terça": case "terça feira":
                  speakOutput = "terça você terá aula de web design das 19 às 22 horas";
-                 tela.telaUni(handlerInput);
+                 parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
-            case "4ª": case "4.ª feira":
+            case "4ª": case "4.ª": case "4.ª feira": case "quarta": case "quarta feira":
                 speakOutput = "quarta você terá aula de infraestrutura de rede das 17 ás 20 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
                 
-            case "5ª": case"5.ª feira":
+            case "5ª": case "5.ª": case "5.ª feira": case "quinta": case "quinta feira":
                 speakOutput = "quinta você terá aula de excel das 18 às 20:30 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
                 
-            case "6ª": case "6.ª":case"6.ª feira":
+            case "6ª": case "6.ª": case "6.ª feira": case "sexta": case "sexta feira":
                 speakOutput="sexta você terá aula de lógica das 15 às 19 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
             case "sábado": case "domingo":
-                speakOutput="você não possue aulas marcadas neste dia";
-                tela.telaUni(handlerInput);
+                speakOutput = "você não possue aulas marcadas neste dia";
+                parTelaAula.ExibirTelaAula(handlerInput);
             break; 
         }
-    
+        
+
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
     }
-    
 };
 
 const AulaPassadoIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AulaPassadoIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AulaPassadoIntent';
     },
     
     handle(handlerInput) {
@@ -110,42 +103,42 @@ const AulaPassadoIntentHandler = {
             
             case "hoje":
                 speakOutput = "Hoje você teve aula de Orientação a Objeto, das 18:30 às 22:10";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
             case "ontem": 
                 speakOutput = "Ontem você teve aula de gerênciaamento de software, das 18:45 às 22 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
 
-            case "2ª":case"2.ª-feira":
+            case "2ª": case "2.ª": case"2.ª-feira" : case"segunda": case"segunda feira":
                 speakOutput = "Segunda você teve aula de matemática das 18 às 22 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
-            case "3ª":case "3.ª feira": case"terça": case"terça feira":
+            case "3ª": case "3.ª": case "3.ª feira": case "terça": case "terça feira":
                  speakOutput = "terça você teve aula de web design das 19 às 22 horas";
-                 tela.telaUni(handlerInput);
+                 parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
-            case "4ª": case "4.ª feira":
+            case "4ª": case "4.ª": case "4.ª feira": case "quarta": case "quarta feira":
                 speakOutput = "quarta você teve aula de infraestrutura de rede das 17 ás 20 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
                 
-            case "5ª": case"5.ª feira":
+            case "5ª": case "5.ª": case "5.ª feira": case "quinta": case "quinta feira":
                 speakOutput = "quinta você teve aula de excel das 18 às 20:30 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
                 
-            case "6ª": case "6.ª":case"6.ª feira":
+            case "6ª": case "6.ª": case "6.ª feira": case "sexta": case "sexta feira":
                 speakOutput="sexta você teve aula de lógica das 15 às 19 horas";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break;
             
             case "sábado": case "domingo":
                 speakOutput="você não teve aulas marcadas neste dia";
-                tela.telaUni(handlerInput);
+                parTelaAula.ExibirTelaAula(handlerInput);
             break; 
         }
     
@@ -157,32 +150,31 @@ const AulaPassadoIntentHandler = {
     
 };
 
-
-
-const NotasIntentHandler = {
-canHandle(handlerInput) {
-return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-&& Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
-},
-handle(handlerInput) {
-const speakOutput = "Você tirou 9.3 na AC, e 9.1 na AI. totalizando assim 9.2 na sua média semestral";
-telaNotas.FUNtelaNotas(handlerInput);
-
-return handlerInput.responseBuilder
-.speak(speakOutput)
-.reprompt(speakOutput)
-.getResponse();
-}
-};
-
 const HorarioCoordenadorIntentHandler = {
-    canHandle(handlerInput){
+    canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HorarioCoordenadorIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HorarioCoordenadorIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Seu coordenador está disponível segunda e sexta, das 14:30 às 18:30 horas na unidade Maracanã';
-        telaCoordenacao.FUNtelaCoordenacao(handlerInput);
+        parTelaCoordenador.ExibirTelaCoordenador(handlerInput);
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const NotasIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = 'Você tirou 9.3 na AC, e 9.1 na AI. totalizando assim 9.2 na sua média semestral';
+        parTelaNotas.ExibirTelaNotas(handlerInput);
+
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -192,20 +184,10 @@ const HorarioCoordenadorIntentHandler = {
 
 
 
-const HelloWorldIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
-    },
-    handle(handlerInput) {
-        const speakOutput = 'Hello World!';
 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt(speakOutput)
-            .getResponse();
-    }
-};
+
+
+
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -229,7 +211,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = 'Tchau!';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -247,7 +229,7 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
+        const speakOutput = 'Desculpe, eu não entendi. Pode repetir novamente?';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -317,11 +299,10 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        HelloWorldIntentHandler,
         AulaIntentHandler,
         AulaPassadoIntentHandler,
-        NotasIntentHandler,
         HorarioCoordenadorIntentHandler,
+        NotasIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,

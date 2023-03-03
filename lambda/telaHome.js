@@ -1,18 +1,31 @@
 const Alexa = require("ask-sdk-core");
 
-const DOCUMENT_ID = "Notas";
+const DOCUMENT_ID = "telaHome";
 
 const datasource = {
-    "multipleChoiceTemplateData": {
+    "headlineTemplateData": {
         "type": "object",
+        "objectId": "headlineSample",
         "properties": {
-            "backgroundImage": "https://image.slidesharecdn.com/unisuam-140926155615-phpapp02/85/case-hybrid-mobile-app-unisuam-1-638.jpg?cb=1671818227",
-            "titleText": "",
-            "primaryText": "",
-          
-            "choiceListType": "number",
-            "headerAttributionImage": "https://seeklogo.com/images/U/unisuam-logo-F9DC14A346-seeklogo.com.png",
-            "footerHintText": "Universidade Rodrigues, Compromisso para a vida toda!"
+            "backgroundImage": {
+                "contentDescription": null,
+                "smallSourceUrl": null,
+                "largeSourceUrl": null,
+                "sources": [
+                    {
+                        "url": "https://desafiosdaeducacao.com.br/wp-content/uploads/2018/11/unisuam1.jpg",
+                        "size": "large"
+                    }
+                ]
+            },
+            "textContent": {
+                "primaryText": {
+                    "type": "PlainText",
+                    "text": ""
+                }
+            },
+            "logoUrl": "https://seeklogo.com/images/U/unisuam-logo-F9DC14A346-seeklogo.com.png",
+            "hintText": "UNISUAM, Compromisso para a vida toda!"
         }
     }
 };
@@ -29,11 +42,11 @@ const createDirectivePayload = (aplDocumentId, dataSources = {}, tokenId = "docu
     }
 };
 
- exports.FUNtelaHome = function(handlerInput) {
+exports.ExibirTelaHome = function(handlerInput) {
         if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
             // generate the APL RenderDocument directive that will be returned from your skill
             const aplDirective = createDirectivePayload(DOCUMENT_ID, datasource);
             // add the RenderDocument directive to the responseBuilder
             handlerInput.responseBuilder.addDirective(aplDirective);
         }
- };
+};

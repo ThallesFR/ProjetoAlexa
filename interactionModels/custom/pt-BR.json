@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "universidade rodrigues",
+      "invocationName": "universidade unisuam",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -13,26 +13,14 @@
         },
         {
           "name": "AMAZON.StopIntent",
-          "samples": [
-            "é só isso alexa",
-            "Obrigado Alexa"
-          ]
-        },
-        {
-          "name": "HelloWorldIntent",
-          "slots": [],
-          "samples": [
-            "olá",
-            "como vai você",
-            "diga oi mundo",
-            "diga oi",
-            "oi",
-            "diga olá mundo",
-            "diga olá"
-          ]
+          "samples": []
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
           "samples": []
         },
         {
@@ -70,6 +58,47 @@
             "quais aulas terei no {diaSemana}",
             "aula que terei no {diaSemana}",
             "aulas que terei no {diaSemana}"
+          ]
+        },
+        {
+          "name": "AulaPassadoIntent",
+          "slots": [
+            {
+              "name": "diaSemanaPas",
+              "type": "AMAZON.DayOfWeek"
+            }
+          ],
+          "samples": [
+            "que aula eu tive {diaSemanaPas}",
+            "que aulas eu tive {diaSemanaPas}",
+            "quais aulas eu tive {diaSemanaPas}",
+            "que aula tive {diaSemanaPas}",
+            "que aulas tive na {diaSemanaPas}",
+            "que aulas tive {diaSemanaPas}",
+            "que aula tive no {diaSemanaPas}",
+            "quais aulas tive {diaSemanaPas}",
+            "quais aulas tive no {diaSemanaPas}",
+            "aula que tive {diaSemanaPas}",
+            "quais aulas que tive {diaSemanaPas}",
+            "aulas que tive no {diaSemanaPas}",
+            "aula  que tive no {diaSemanaPas}",
+            "aula que eu tive na {diaSemanaPas} passada",
+            "aula que tive no {diaSemanaPas} passado",
+            "que aulas tive {diaSemanaPas} passada",
+            "quais aulas tive {diaSemanaPas} passada ",
+            "que aulas tive {diaSemanaPas} passado",
+            "que aula tive {diaSemanaPas} passado",
+            "quais aulas tive {diaSemanaPas} passado",
+            "{diaSemanaPas} tive aula de que ",
+            "{diaSemanaPas} tive que aula ",
+            "{diaSemanaPas} tive quais aulas ",
+            "{diaSemanaPas} tive que aulas ",
+            "{diaSemanaPas} tive aulas de que ",
+            "{diaSemanaPas} quais aulas eu tive ",
+            "{diaSemanaPas} que aulas eu tive",
+            "{diaSemanaPas} que aula tive ",
+            "{diaSemanaPas} que aulas tive ",
+            "{diaSemanaPas} quais aulas tive "
           ]
         },
         {
@@ -175,51 +204,10 @@
             "nota",
             "notas"
           ]
-        },
-        {
-          "name": "AulaPassadoIntent",
-          "slots": [
-            {
-              "name": "diaSemanaPas",
-              "type": "AMAZON.DayOfWeek"
-            }
-          ],
-          "samples": [
-            "que aula eu tive {diaSemanaPas}",
-            "que aulas eu tive {diaSemanaPas}",
-            "quais aulas eu tive {diaSemanaPas}",
-            "que aula tive {diaSemanaPas}",
-            "que aulas tive na {diaSemanaPas}",
-            "que aulas tive {diaSemanaPas}",
-            "que aula tive no {diaSemanaPas}",
-            "quais aulas tive {diaSemanaPas}",
-            "quais aulas tive no {diaSemanaPas}",
-            "aula que tive {diaSemanaPas}",
-            "quais aulas que tive {diaSemanaPas}",
-            "aulas que tive no {diaSemanaPas}",
-            "aula  que tive no {diaSemanaPas}",
-            "aula que eu tive na {diaSemanaPas} passada",
-            "aula que tive no {diaSemanaPas} passado",
-            "que aulas tive {diaSemanaPas} passada",
-            "quais aulas tive {diaSemanaPas} passada ",
-            "que aulas tive {diaSemanaPas} passado",
-            "que aula tive {diaSemanaPas} passado",
-            "quais aulas tive {diaSemanaPas} passado",
-            "{diaSemanaPas} tive aula de que ",
-            "{diaSemanaPas} tive que aula ",
-            "{diaSemanaPas} tive quais aulas ",
-            "{diaSemanaPas} tive que aulas ",
-            "{diaSemanaPas} tive aulas de que ",
-            "{diaSemanaPas} quais aulas eu tive ",
-            "{diaSemanaPas} que aulas eu tive",
-            "{diaSemanaPas} que aula tive ",
-            "{diaSemanaPas} que aulas tive ",
-            "{diaSemanaPas} quais aulas tive "
-          ]
         }
       ],
       "types": []
     }
   },
-  "version": "48"
+  "version": "4"
 }

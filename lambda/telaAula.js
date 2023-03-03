@@ -1,6 +1,6 @@
 const Alexa = require("ask-sdk-core");
 
-const DOCUMENT_ID = "UnisuamAula";
+const DOCUMENT_ID = "telaAula";
 
 const datasource = {
     "textListData": {
@@ -17,7 +17,7 @@ const datasource = {
                 }
             ]
         },
-        "title": "Calendário do dia",
+        "title": "Aula do dia",
         "listItems": [
             {
                 "primaryText": "Aula: ${Api.aula}",
@@ -75,27 +75,14 @@ const createDirectivePayload = (aplDocumentId, dataSources = {}, tokenId = "docu
         datasources: dataSources
     }
 };
-/*const SampleAPLRequestHandler = {
-    canHandle(handlerInput) {
-        // handle named intent
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'INTENT_NAME';
-    },*/
-    exports.telaUni = function(handlerInput) {
+
+exports.ExibirTelaAula = function(handlerInput) {
         if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
             // generate the APL RenderDocument directive that will be returned from your skill
             const aplDirective = createDirectivePayload(DOCUMENT_ID, datasource);
             // add the RenderDocument directive to the responseBuilder
             handlerInput.responseBuilder.addDirective(aplDirective);
         }
+};
 
-        // send out skill response
-        //return handlerInput.responseBuilder.getResponse();
-    }
-    
-    
-//};
 
-/*exports.handler = Alexa.SkillBuilders.custom()
-    .addRequestHandlers(SampleAPLRequestHandler)
-    .lambda();*/
