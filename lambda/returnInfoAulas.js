@@ -1,12 +1,8 @@
-function returnInfoAulas(aulas, diaSemanaDesejado) {
-    const materiasComAulasNoDia = aulas.usuarios.flatMap(usuario =>
-      usuario.cursos.flatMap(curso =>
-        curso.materias.filter(materia =>
-          materia.dia_semana === diaSemanaDesejado
-        )
-      )
-    );
-    return materiasComAulasNoDia;
-  }
+function returnInfoAulas(quadroHorario, diaSemanaDesejado) {
+  const materiasComAulasNoDia = quadroHorario.filter(aula =>
+   aula.dia_descricao === diaSemanaDesejado
+  )
+  return materiasComAulasNoDia;
+}
 
 module.exports = returnInfoAulas;
