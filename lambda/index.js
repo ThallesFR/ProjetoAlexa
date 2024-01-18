@@ -4,6 +4,7 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+// Função tela
 const exibirTelaAula = require('./telaAula.js');
 const exibirTelaNota = require('./telaNotas.js');
 const exibirTelaCoordenador = require('./telaCoordenador.js');
@@ -11,15 +12,16 @@ const parTelaHome = require('./telaHome.js');
 const parTelaPosGraduacao = require('./telaPosGraduacao.js');
 const parTelaMestrado = require('./telaMestrado.js');
 const parTelaInscricao = require('./telaInscricao.js');
-const filtrarNotas = require('./filterNotas.js');
-const filtrarCurso = require('./filterUser.js');
+
+// Função alexa use
+const encontrarObjetoPorSemestre = require('./fitraNotasSemestre.js')
 const returnInfoAulas = require('./returnInfoAulas.js');
 const returnConsoleAula = require('./returnConsoleAula.js');
 const returnDiaSemana = require('./returnDiaSemana.js');
-const fs = require('fs');
-const data = fs.readFileSync('./dados.json');
-const usuario = JSON.parse(data).usuarios;
-const aulas = JSON.parse(data);
+const removerSegundos = require('./fitrasegs.js');
+const diaMaisProximo = require('./filterdiacoordenador.js');
+const abreviacaoParaDiaExtenso = require('.//diaextenso.js');
+
 const axios = require('axios');
 
 const fetchApi = async (value) => {
@@ -309,21 +311,30 @@ const HorarioCoordenadorIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HorarioCoordenadorIntent';
     },
-    async handle(handlerInput) {
-
+     async handle(handlerInput) {
         try {
-            const dados_coordenador = await fetchApi('https://65a53f6952f07a8b4a3eb0f4.mockapi.io/api/coordenador');
-            const coordenador = filtrarCurso(dados_coordenador.data, handlerInput);
-            const speakOutput = `O coordenador ${dados_coordenador.data.nome} está disponível na unidade ${coordenador.descricao} todas as segundas e sextas, das ${coordenador.coordenador.horario}.`;
-            exibirTelaCoordenador(handlerInput);
+            const coordenadorResponse = await fetchApi('https://65a53f6952f07a8b4a3eb0f4.mockapi.io/api/coordenador');
+
+            const coordenadorInfo = coordenadorResponse.data[0];
+
+            const horaInicio = removerSegundos(coordenadorInfo.quadroHorario[0].horaInicio);
+
+            const horaFim = removerSegundos(coordenadorInfo.quadroHorario[0].horaFim);
+
+            const diaProximo = diaMaisProximo(coordenadorResponse.data);
+            
+            const diaExtenso = abreviacaoParaDiaExtenso(diaProximo);
+
+            const speakOutput = `O coordenador ${coordenadorInfo.nome} está disponível na unidade ${coordenadorInfo.quadroHorario[0].descricao}, na ${diaExtenso}-feira, a partir das ${horaInicio} até as ${horaFim}.`;
+            
+            exibirTelaCoordenador(handlerInput,coordenadorInfo,diaExtenso,horaInicio,horaFim);
 
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(speakOutput)
                 .getResponse();
-
         } catch (error) {
-            const speakOutput = 'Houve um erro no servidor.';
+            const speakOutput = 'Parece que o servidor esta passando por um problema tente pelo site ou mais tarde';
             parTelaHome.ExibirTelaHome(handlerInput);
 
             return handlerInput.responseBuilder
@@ -383,26 +394,43 @@ const InscricaoIntentHandler = {
     }
 };
 
+
 const notasMateriasIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'notasMateriasIntent';
     },
+    async handle(handlerInput) {
+        try{
+            const boletim = await fetchApi('https://65a53f6952f07a8b4a3eb0f4.mockapi.io/api/boletim');
 
-    handle(handlerInput) {
+            const boletimInfo = encontrarObjetoPorSemestre(boletim.data,'2024-1');
+            const colunaBoletim= boletimInfo.colunas
+            const notaBoletim = boletimInfo.notas
 
-        const notas = filtrarNotas(usuario, handlerInput);
+            // if(notaBoletim[2]==''){
+            //     const speakOutput = `Sua notas são ${colunaBoletim[0]} : ${notaBoletim[0]},${colunaBoletim[1]} : ${notaBoletim[1]} e sua media final e : ${notaBoletim[3]}`;
+            //     return speakOutput
+            // }
+                const speakOutput = `Sua notas são ${colunaBoletim[0]} : ${notaBoletim[0]},${colunaBoletim[1]} : ${notaBoletim[1]} e sua media final e : ${notaBoletim[3]}`;
 
-        let speakOutput = `Suas notas são, na A1 nota ${notas.notas.a1}, na A2 nota ${notas.notas.a2}, na A3 nota ${notas.notas.a3} e sua média final é ${notas.notas.media}.`;
-        exibirTelaNota(handlerInput);
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
+            exibirTelaNota(handlerInput,notaBoletim,colunaBoletim,boletimInfo)
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
+        catch(err){
+            const speakOutput = `erro ao acessar o servidor por favor tente mais tarde obrigado.`;
+    
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                .reprompt(speakOutput)
+                .getResponse();
+        }
     }
-
 };
+
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
